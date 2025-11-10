@@ -116,7 +116,7 @@ function SortableRow({ row, onChange, onDelete, onCopy }: {
 }
 
 // --- Main App ---
-export default function App() {
+export default function App({ modalName = "name" }: { modalName?: string }) {
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -147,7 +147,7 @@ export default function App() {
     try {
       const form = new FormData();
       form.append("file", new File([file], file.name, { type: "application/pdf" }));
-      const res = await fetch("https://jbarrow--splitter-splitter-app.modal.run/upload", {
+      const res = await fetch(`https://${modalName}--splitter-splitter-app.modal.run/upload`, {
         method: "POST",
         body: form,
       });
@@ -214,7 +214,7 @@ export default function App() {
         filename: outputName || "merged.pdf",
         documents: rows.map((r) => ({ documentId: r.documentId, split: r.split })),
       };
-      const res = await fetch("https://jbarrow--splitter-splitter-app.modal.run/split", {
+      const res = await fetch(`https://${modalName}--splitter-splitter-app.modal.run/split`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

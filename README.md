@@ -10,9 +10,17 @@ You can upload PDFs, drag and drop them to reorder, and select specific pages fo
 
 PDFs are retained for the session but are automatically cleaned up.
 
+## Installation
+
+First install bun, then run:
+```
+cd frontend
+bun install
+```
+
 ## Deployment
 
-Deployment is easy, just run:
+Deployment is easy, just change `const modalName = '<username>';` to your Modal username in `frontend/src/main.tsx` and run:
 
 ```sh
 bash scripts/deploy.sh
